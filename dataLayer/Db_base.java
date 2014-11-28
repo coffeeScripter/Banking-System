@@ -1,7 +1,7 @@
-/**
- * 
- */
+package dataLayer;
+
 import java.sql.*;
+
 /**
  * 	This class creates the variables and constructors for any database abstraction layer. This should be paired with the Db_Abstraction interface.
  * 	@author Noah Peterham
@@ -17,7 +17,7 @@ public class Db_base {
 	protected String driver     = "com.mysql.jdbc.Driver";
 	protected String userId     = "root";	// testing only
 	protected String userPasswd = "student";// testing only
-	protected Connection conn = null;
+	protected Connection conn 	= null;
 	
 //Constructor code
 	/**

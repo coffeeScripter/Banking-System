@@ -1,9 +1,7 @@
+package dataLayer;
+
 import java.sql.*;
 import java.util.ArrayList;
-
-/**
- * 
- */
 
 /**
  * @author Noah
@@ -71,9 +69,11 @@ public class Database extends Db_base implements Db_Abstraction {
 
 	}//close
 
+	/* (non-Javadoc)
+	 * @see dataLayer.Db_Abstraction#selectData(java.lang.String)
+	 */
 	public ResultSet selectData(String query){
 		
-		String sql = query;
 		Statement st = null;
 		ResultSet rs = null;
 		
@@ -88,6 +88,9 @@ public class Database extends Db_base implements Db_Abstraction {
 	}
 
 	// *******************************************    
+	/* (non-Javadoc)
+	 * @see dataLayer.Db_Abstraction#getData(java.lang.String)
+	 */
 	public ArrayList<ArrayList<String>> getData (String sql){
 
 		ArrayList<ArrayList<String>> list1 = new ArrayList<ArrayList<String>>();
@@ -119,6 +122,9 @@ public class Database extends Db_base implements Db_Abstraction {
 	}//end get data
 
 	// *******************************************    
+	/* (non-Javadoc)
+	 * @see dataLayer.Db_Abstraction#getData(java.lang.String, boolean)
+	 */
 	public ArrayList<ArrayList<String>> getData (String sql, boolean colName){
 
 		ArrayList<ArrayList<String>> list1 = new ArrayList<ArrayList<String>>();
@@ -181,6 +187,9 @@ public class Database extends Db_base implements Db_Abstraction {
 		return -1;
 	} // end set data
 
+	
+// transaction code	
+	
 	// *******************************************  
 	/* (non-Javadoc)
 	 * @see Db_Abstraction#startTrans()
