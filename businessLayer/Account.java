@@ -14,7 +14,7 @@ public class Account {
 	String name;
 	int number;
 	double balance;
-	ArrayList transHist;
+	ArrayList<Transaction> transHist;
 	/**
 	 * represnts an account having a 
 	 *  name,
@@ -44,10 +44,10 @@ public class Account {
 	public void setBalance(double balance) {
 		this.balance = balance;
 	}
-	public ArrayList getTransHist() {
+	public ArrayList<Transaction> getTransHist() {
 		return transHist;
 	}
-	public void setTransHist(ArrayList transHist) {
+	public void setTransHist(ArrayList<Transaction> transHist) {
 		this.transHist = transHist;
 	}
 	
