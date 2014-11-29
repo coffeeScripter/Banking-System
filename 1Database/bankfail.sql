@@ -104,7 +104,8 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Transaction` (
   `trans_type_code` VARCHAR(20) NOT NULL,
   `account_number` INT NOT NULL,
   `trans_date` TIMESTAMP NOT NULL,
-  `actor_id` VARCHAR(45) NOT NULL,
+  `cust_id` VARCHAR(45) UNIQUE NOT NULL,
+  `emp_id` VARCHAR(45) UNIQUE NOT NULL,
   PRIMARY KEY (`trans_id`),
   CONSTRAINT `fk_account_number`
     FOREIGN KEY (`account_number`)
@@ -112,11 +113,11 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Transaction` (
   CONSTRAINT `fk_trans_type_code`
     FOREIGN KEY (`trans_type_code`)
     REFERENCES `mydb`.`TransType` (`trans_type_code`),
-  CONSTRAINT `fk_cust_id`
-    FOREIGN KEY (`actor_id`)
+  CONSTRAINT `fk_trans_cust_id`
+    FOREIGN KEY (`cust_id`)
     REFERENCES `mydb`.`Customer` (`cust_id`),
-  CONSTRAINT `fk_emp_id`
-    FOREIGN KEY (`actor_id`)
+  CONSTRAINT `fk_trans_emp_id`
+    FOREIGN KEY (`emp_id`)
     REFERENCES `mydb`.`Employee` (`emp_id`))
 ;
 
