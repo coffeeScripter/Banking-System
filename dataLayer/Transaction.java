@@ -1,7 +1,7 @@
 /**
  * 
  */
-package businessLayer;
+package dataLayer;
 
 import java.text.SimpleDateFormat;
 
@@ -22,6 +22,9 @@ public class Transaction {
 	public Transaction() {
 		// TODO Auto-generated constructor stub
 	}
+	/**
+	 * @param type the type of transaction d,w,u
+	 */
 	public Transaction(char type){
 		this.type = type;
 	}

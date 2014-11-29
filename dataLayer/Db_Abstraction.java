@@ -35,6 +35,7 @@ public interface Db_Abstraction {
 	 */
 	
 	public ResultSet selectData(String query);
+	
 	/**
 	 * Calls the selectData method and then parses the ResultSet
 	 * @param query		The String representation of the select query to run
