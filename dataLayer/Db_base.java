@@ -3,6 +3,8 @@ package dataLayer;
 import java.sql.*;
 import java.util.ArrayList;
 
+import businessLayer.Token;
+
 /**
  * 	This class creates the variables and constructors for any database abstraction layer. This should be paired with the Db_Abstraction interface.
  * 	@author Noah Peterham
@@ -30,7 +32,10 @@ public class Db_base {
 		this.userId = userId;
 		this.userPasswd = userPasswd;
 	}
-	
+	public Db_base(Token t){
+		this.userId = t.getId();
+		this.userPasswd = t.getPassword();
+	}
 	/**
 	 * Class constructor that sets the all required information to connect to the database.
 	 * @param uri 		 	The location of the database
