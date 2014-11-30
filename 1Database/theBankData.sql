@@ -330,10 +330,10 @@ COMMIT;
 -- -----------------------------------------------------
 START TRANSACTION;
 USE `mydb`;
-INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('withd', 'Withdrawal');
-INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('dep', 'Deposit');
-INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('adj', 'Adjustment');
-INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('inter', 'Interest');
+INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('w', 'Withdrawal');
+INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('d', 'Deposit');
+INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('a', 'Adjustment');
+INSERT INTO `mydb`.`TransType` (`trans_type_code`, `decription`) VALUES ('i', 'Interest');
 
 COMMIT;
 
