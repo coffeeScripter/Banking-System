@@ -72,7 +72,7 @@ CREATE TABLE Account (
   account_number INT UNIQUE NOT NULL,
   `balance` DECIMAL(8,2) NULL,
   cust_id VARCHAR(45) UNIQUE NOT NULL,
-  `intrest_rate` DECIMAL(4,2) NOT NULL,
+  `interest_rate` DECIMAL(4,2) NOT NULL,
   PRIMARY KEY (account_number),
   CONSTRAINT 
     FOREIGN KEY (cust_id)
