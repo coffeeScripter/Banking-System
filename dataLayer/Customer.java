@@ -1,8 +1,14 @@
 package dataLayer;
 
 import java.sql.*;
-import java.util.*;
 
+import businessLayer.Token;
+
+/**
+ * 	@author Noah Peterham
+ * 	@author Brian Duffy
+ * 	@author Jon Koch
+ */
 
 public class Customer extends Db_base{
 
@@ -11,18 +17,18 @@ public class Customer extends Db_base{
 	String password;	// customer password
 
 
-	public Customer(String userId, String userPassword) {
-		super(userId, userPassword);
+	public Customer(Token t) {
+		super(t);
 		this.id = 0;
 		this.custId = null;
 		this.password = null;
 	}
-	public Customer(String CustID, String userId, String userPassword) {
-		super(userId, userPassword);
+	public Customer(String CustID, Token t) {
+		super(t);
 		this.custId = CustID;
 	}
-	public Customer(String CustID, int pID, String pwd, String userId, String userPassword) {
-		super(userId, userPassword);
+	public Customer(String CustID, int pID, String pwd, Token t) {
+		super(t);
 		this.id = pID;
 		this.custId = CustID;
 		this.password = pwd;
@@ -65,7 +71,10 @@ public class Customer extends Db_base{
 	public void setPwd(String pwd) {
 		this.password = pwd;
 	}
-
+	/**
+	 * gets the id and password from the customer id
+	 *
+	 */
 	public boolean fetchCust(){
 		try{
 
@@ -154,8 +163,8 @@ public class Customer extends Db_base{
 	public boolean postNewCust(){
 
 		try{
-			PreparedStatement pstmt = getConn().prepareStatement("INSERT INTO customer VALUES "
-					+ "(cust_id = ?, id = ?, cust_password = ?");
+			PreparedStatement pstmt = getConn().prepareStatement("INSERT INTO customer "
+					+ "('cust_id', 'id', 'cust_password) VALUES (?, ?, ?)");
 
 			pstmt.setString(1, getCustId());
 			pstmt.setInt(2, getID());

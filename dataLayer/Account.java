@@ -6,9 +6,12 @@ package dataLayer;// should be in dataLayer
 import java.sql.*;
 import java.util.*;
 
+import businessLayer.Token;
+
 /**
- * @author Noah, Brian
- *
+ * 	@author Noah Peterham
+ * 	@author Brian Duffy
+ * 	@author Jon Koch
  */
 public class Account extends Db_base{
 
@@ -26,19 +29,19 @@ public class Account extends Db_base{
 	 */
 
 
-	public Account(String userId, String userPassword) {
-		super(userId, userPassword);
+	public Account(Token t) {
+		super(t);
 		this.acctId = 0;
 		this.custId = null;
 		this.balance = 0;
 		this.intRate = 0;
 	}
-	public Account(int AccID,String userId, String userPassword){
-		super(userId, userPassword);
+	public Account(int AccID, Token t){
+		super(t);
 		this.acctId = AccID;
 	}
-	public Account(int AccID, String CustID, double Bal, double Rate ,String userId, String userPassword){
-		super(userId, userPassword);
+	public Account(int AccID, String CustID, double Bal, double Rate ,Token t){
+		super(t);
 		this.acctId = AccID;
 		this.custId = CustID;
 		this.balance = Bal;
@@ -118,7 +121,7 @@ public class Account extends Db_base{
 	 * gets all the account information from the database
 	 * @param acctId the number of the account being fetched
 	 */
-	public boolean fetch(){
+	public boolean fetchAcc(){
 		try{
 
 			PreparedStatement pstmt = getConn().prepareStatement("SELECT "
@@ -143,7 +146,7 @@ public class Account extends Db_base{
 
 		// returns true if no issues are found.
 		return true;
-	}// end fetch
+	}// end fetchAcc
 
 	/**
 	 * updates the account balance in the database
