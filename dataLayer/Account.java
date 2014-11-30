@@ -5,6 +5,8 @@ package dataLayer;// should be in dataLayer
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.*;
 
 /**
@@ -43,7 +45,7 @@ public class Account extends Db_base{
 	public ArrayList<Transaction> getTransHist() {
 		return transHist;
 	}
-	
+	/*
 	protected double withdraw(double amt){
 		d.getConn();
 		d.startTrans();
@@ -56,6 +58,7 @@ public class Account extends Db_base{
 	protected double deposit(double amt){
 		return newBalance;
 	}
+	*/
 	
 	private boolean fetch(){
 		try{
@@ -84,6 +87,24 @@ public class Account extends Db_base{
 
 	// updates this objects data
 	private void post(){
+
+		try{
+			PreparedStatement pstmt = getConn().prepareStatement(
+			Statement st = conn.createStatement();
+
+			int num = st.executeUpdate(sql);
+			if (num == 1){
+
+				return true;
+			}
+		}
+		catch(SQLException sqlEX) {
+			System.out.println("statement unsuccessful");
+			System.out.println(sqlEX.getMessage());
+		}
+		//  close();
+		return false;
+	} // end set data
 		
 	}
 
