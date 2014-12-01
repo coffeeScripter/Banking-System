@@ -167,7 +167,7 @@ public class Employee extends Db_base{
 		// Increment employee id by 1
 		eNum = Integer.parseInt(curMax.substring(3));
 		eNum++;
-		newEid = "C" + eNum;
+		newEid = "EMP" + eNum;
 
 		// returns new employee id.
 		return newEid;
