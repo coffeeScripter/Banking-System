@@ -18,7 +18,7 @@ USE `mydb` ;
 DROP TABLE IF EXISTS `mydb`.`people` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`people` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `first_name` VARCHAR(45) NULL,
   `last_name` VARCHAR(45) NULL,
   `email` VARCHAR(45) NULL,
@@ -32,7 +32,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Customer` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Customer` (
-  `id` INT NOT NULL,
+  `id` INT NOT NULL AUTO_INCREMENT,
   `cust_id` VARCHAR(45) UNIQUE NOT NULL,
   `cust_password` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`id`, `cust_id`),
@@ -50,7 +50,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Employee` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Employee` (
-  `id` INT UNIQUE NOT NULL,
+  `id` INT UNIQUE NOT NULL AUTO_INCREMENT,
   `emp_id` VARCHAR(45) UNIQUE NOT NULL,
   `emp_password` VARCHAR(45) NOT NULL,
   `role` VARCHAR(45) NOT NULL,
@@ -87,7 +87,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`TransType` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`TransType` (
-  `trans_type_code` VARCHAR(20) UNIQUE NOT NULL,
+  `trans_type_code` CHAR UNIQUE NOT NULL, # expected to be D/W/A
   `decription` VARCHAR(45) NULL,
   PRIMARY KEY (`trans_type_code`))
 ENGINE = InnoDB;
@@ -99,7 +99,7 @@ ENGINE = InnoDB;
 DROP TABLE IF EXISTS `mydb`.`Transaction` ;
 
 CREATE TABLE IF NOT EXISTS `mydb`.`Transaction` (
-  `trans_id` INT NOT NULL,
+  `trans_id` INT NOT NULL AUTO_INCREMENT,
   `amount` DECIMAL(6,2) NOT NULL,
   `trans_type_code` VARCHAR(20) NOT NULL,
   `account_number` INT NOT NULL,
