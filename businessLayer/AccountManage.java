@@ -25,6 +25,7 @@ public class AccountManage {
 		// get balance
 		// do math
 		// Account.postBal()
+		// record transaction
 		return true;
 	}
 	public boolean withdrawal(int aNum, double amt){
@@ -32,6 +33,7 @@ public class AccountManage {
 		// get balance
 		// do math
 		// Account.postBal()
+		// record transaction
 		return true;
 	}
 	
