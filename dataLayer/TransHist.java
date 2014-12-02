@@ -6,25 +6,25 @@ package dataLayer;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.ArrayList;
-
 import businessLayer.Token;
+
 /**
  * @author Noah
  *
  */
 public class TransHist {
 	private ArrayList<Transaction> hist;
-	private Transaction trans;
+//	private Transaction trans; poolling possibility
 	private Token t;
+	
 	public TransHist(Token t){
 		this.t = t;
 	}
-	
-	private int populate(int acct_id){
+	public ArrayList<Transaction> populate(int acct_id){
 		try{
 			// errant use of a PreparedStatement
 			
-			PreparedStatement pstmt = new Db_base(t).getConn().prepareStatement("SELECT "
+			PreparedStatement pstmt = t.getTokenConn().getConn().prepareStatement("SELECT "
 					+ "id, amount FROM Account "
 					+ "WHERE acct_id LIKE ?" );
 			//set values for the prepared statement
@@ -37,12 +37,11 @@ public class TransHist {
 			while(rs.next()){
 				hist.add(new Transaction(rs.getInt("trans_id"),rs.getDouble("amount"), t));	
 			}
-			return hist.size();
 			
 		}catch(Exception e){
 			e.printStackTrace();
-			return -1;
 		}
+		return hist;
 		
 	}
 	// add more methods like populate for other search terms as needed

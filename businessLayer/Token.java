@@ -3,13 +3,9 @@
  */
 package businessLayer;
 
-/**
- * @author Noah
- *
- */
-/**
- * 
- */
+import java.sql.*;
+
+import dataLayer.Db_base;
 
 /**
  * @author Noah
@@ -17,46 +13,52 @@ package businessLayer;
  *	it holds the information 
  */
 public class Token {
-	private String id, password, name, access;
+	private String id, password;
 	private boolean isValid;
-
+	private Db_base tokenConn;
 	/**
 	 * 
 	 */
 	public Token(String id, String password) {
 		this.id = id;
 		this.password = password;
+		tokenConn = new Db_base("root", "student"); // need to change
+		tokenConn.connect();
 	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	public String getAccess() {
-		return access;
-	}
-	public void setAccess(String access) {
-		this.access = access;
-	}
-	public boolean isValid() {
+	
+	public boolean isValid(){
+		try{
+			PreparedStatement pstmt = tokenConn.getConn(). prepareStatement("SELECT count() FROM User WHERE user_id = '?' AND password = '?'");// check if this is the right SQL 
+			
+			pstmt.setString(1, id);
+			pstmt.setString(2, password);
+			
+			ResultSet rs =  pstmt.executeQuery();
+			if (rs.getInt(1) == 0){
+				isValid = true;
+			}
+			isValid = false;
+		}catch(SQLException sqle){
+//			BankException be = new BankException(sqle);
+			System.out.println("Error");
+		}catch(Exception e){
+//			BankException be = new BankException(e);
+			System.out.println("Error");
+		}
+		isValid = false;
 		return isValid;
 	}
-	public void setValid(boolean isValid) {
-		this.isValid = isValid;
+
+	/**
+	 * @return the tokenConn
+	 */
+	public Db_base getTokenConn() {
+		if(isValid){
+			return tokenConn;
+		}
+		else{
+			return null;
+		}
 	}
-
-
+	
 }

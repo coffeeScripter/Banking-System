@@ -16,11 +16,11 @@ public class Db_base {
 	//	Default connection variables
 	// 	These are set in the event that a user doesn't specify a database to connect to.
 	protected String dbString	= "jdbc:mysql://";
-	protected String uri        = "localhost/travel";
+	protected String uri        = "localhost/mydb";
 	protected String driver     = "com.mysql.jdbc.Driver";
 	protected String userId     = "root";	// testing only
 	protected String userPasswd = "student";// testing only
-	protected Connection conn 	= null;
+	protected Connection conn;
 	
 //Constructor code
 	/**
@@ -32,10 +32,7 @@ public class Db_base {
 		this.userId = userId;
 		this.userPasswd = userPasswd;
 	}
-	public Db_base(Token t){
-		this.userId = t.getId();
-		this.userPasswd = t.getPassword();
-	}
+
 	/**
 	 * Class constructor that sets the all required information to connect to the database.
 	 * @param uri 		 	The location of the database
