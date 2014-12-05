@@ -13,7 +13,7 @@ import businessLayer.Token;
  * 	@author Brian Duffy
  * 	@author Jon Koch
  */
-public class Account extends Db_base{
+public class Account interface Transaction extends Db_base {
 
 	int acctId;		// unique identifier for the account
 	String custId;	// unique identifier for the customer
@@ -46,7 +46,7 @@ public class Account extends Db_base{
 		this.custId = CustID;
 		this.balance = Bal;
 		this.intRate = Rate;
-	}	
+	}
 
 
 	// getters and setters

@@ -1,9 +1,13 @@
-package dataLayer;
+/**
+ * 
+ */
+package DataLayer;
+
 
 import java.sql.*;
 import java.util.ArrayList;
 
-import businessLayer.Token;
+import DataLayer.Token;
 
 /**
  * 	This class creates the variables and constructors for any database abstraction layer. This should be paired with the Db_Abstraction interface.
@@ -12,19 +16,15 @@ import businessLayer.Token;
  * 	@author Jon Koch
  *	@version 1.1.1.1, 11-25-14
  */
-public class Db_base {
+public class Db_Base {
 	//	Default connection variables
 	// 	These are set in the event that a user doesn't specify a database to connect to.
 	protected String dbString	= "jdbc:mysql://";
-	protected String uri        = "localhost/mydb";
+	protected String uri        = "localhost/travel";
 	protected String driver     = "com.mysql.jdbc.Driver";
 	protected String userId     = "root";	// testing only
-<<<<<<< HEAD
-	protected String userPasswd = "Snapple4Life%";// testing only
-=======
 	protected String userPasswd = "student";// testing only
->>>>>>> ea04797f529047c6704fd3c1bc68e34b9cc44a0a
-	protected Connection conn;
+	protected Connection conn 	= null;
 	
 //Constructor code
 	/**
@@ -32,16 +32,14 @@ public class Db_base {
 	 * @param userId		The username for connecting to the database
 	 * @param userPasswd 	The password for connecting to the database
 	 */
-	public Db_base(String userId, String userPasswd) {
+	public Db_Base(String userId, String userPasswd) {
 		this.userId = userId;
 		this.userPasswd = userPasswd;
 	}
-<<<<<<< HEAD
-   public Db_base(){
-   }
-=======
-
->>>>>>> ea04797f529047c6704fd3c1bc68e34b9cc44a0a
+	public Db_Base(Token t){
+		this.userId = t.getId();
+		this.userPasswd = t.getPassword();
+	}
 	/**
 	 * Class constructor that sets the all required information to connect to the database.
 	 * @param uri 		 	The location of the database
@@ -49,7 +47,7 @@ public class Db_base {
 	 * @param userId	 	The username for connecting to the database
 	 * @param userPasswd 	The password for connecting to the database
 	 */
-	public Db_base(String uri, String driver, String userId, String userPasswd) {
+	public Db_Base(String uri, String driver, String userId, String userPasswd) {
 		this.uri = uri;
 		this.driver = driver;
 		this.userId = userId;
@@ -63,14 +61,19 @@ public class Db_base {
 	//connect
 	public boolean connect(){
 
+		try{
+			Class.forName(driver);
+		}
+		catch (ClassNotFoundException clEx){
+			System.out.println(clEx.getMessage());
+		}
 
 		try{
-			conn = DriverManager.getConnection(dbString + uri, "root", "Snapple4Life%");
+			conn = DriverManager.getConnection(uri, userId, userPasswd);
 			return true;
 		}
 		catch (SQLException se){
-         se.printStackTrace();
-			System.out.println(se.getStackTrace() + "umm");
+			System.out.println(se.getMessage());
 		}
 		return false;
 	}
@@ -112,83 +115,6 @@ public class Db_base {
 		
 		return rs;
 	}
-
-	/* (non-Javadoc)
-	 * @see dataLayer.Db_Abstraction#getData(java.lang.String)
-	 */
-	public ArrayList<ArrayList<String>> getData (String sql){
-
-		ArrayList<ArrayList<String>> list1 = new ArrayList<ArrayList<String>>();
-		ArrayList<String> list2 = new ArrayList<String>();
-		int colnum; // the number of returned columns
-		
-		ResultSet rs = selectData(sql);
-		try {
-			ResultSetMetaData mrs = rs.getMetaData();
-			colnum = mrs.getColumnCount();
-		
-			// iterates through the resultset turning each sql table row into an ArrayList<String>
-			// this ArrayList<String> is then added to another ArrayList which is then returned.
-			while(rs.next()){
-				list2 = new ArrayList<String>();
-				for (int i=1; i<= colnum; i++){
-					list2.add(rs.getString(i));
-				}
-				list1.add(list2);
-			}
-			
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		// close();
-		return list1;
-
-	}//end get data
-
-	/* (non-Javadoc)
-	 * @see dataLayer.Db_Abstraction#getData(java.lang.String, boolean)
-	 */
-	public ArrayList<ArrayList<String>> getData (String sql, boolean colName){
-
-		ArrayList<ArrayList<String>> list1 = new ArrayList<ArrayList<String>>();
-		ArrayList<String> list2 = new ArrayList<String>();
-		ResultSet rs = selectData(sql);
-		ResultSetMetaData mrs;
-		
-		try {
-			mrs = rs.getMetaData();
-			
-			int colnum = mrs.getColumnCount();
-	
-	//		is this needed?
-			if (colName){
-				list2 = new ArrayList<String>();
-	//			adds an array for the column title to the start of the returned array,list2
-				for (int i=1; i<= colnum; i++){
-					list2.add(mrs.getColumnName(i));
-				}            
-				list1.add(list2);
-			}
-			// iterates through the resultset turning each sql table row into an ArrayList<String>
-			// this ArrayList<String> is then added to another ArrayList which is then returned.
-			while(rs.next()){
-				list2 = new ArrayList<String>();
-				for (int i=1; i<= colnum; i++){
-					list2.add(rs.getString(i));
-				}
-				list1.add(list2);
-	
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
-		return list1;
-
-	}//end get data
-
 
 // *******************************************  
 	// Update // and delete

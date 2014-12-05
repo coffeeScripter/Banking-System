@@ -22,12 +22,43 @@ public class Token {
 	public Token(String id, String password) {
 		this.id = id;
 		this.password = password;
+<<<<<<< HEAD
+		tokenConn = new Db_base("root", "Snapple4Life%"); // need to change
+		tokenConn.connect();
+      isValid();
+=======
 		tokenConn = new Db_base("root", "student"); // need to change
 		tokenConn.connect();
+>>>>>>> ea04797f529047c6704fd3c1bc68e34b9cc44a0a
 	}
 	
 	public boolean isValid(){
 		try{
+<<<<<<< HEAD
+			PreparedStatement pstmt = tokenConn.getConn(). prepareStatement("SELECT count(*) AS count FROM Customer WHERE cust_id = ? AND cust_password = ?");// check if this is the right SQL 
+			
+	   	pstmt.setString(1, id);
+   		pstmt.setString(2, password);
+
+         ResultSet rs = pstmt.executeQuery();
+         rs.next();
+         
+         if (rs.getInt("count") == 1){
+				isValid = true;
+			}else{
+   			isValid = false;
+         }
+		}catch(SQLException sqle){
+
+			System.out.println("Error at 47");
+		   sqle.printStackTrace();
+
+      }catch(Exception e){
+
+			System.out.println("Error");
+		}
+      System.out.println(isValid + " YES PLEASE");
+=======
 			PreparedStatement pstmt = tokenConn.getConn(). prepareStatement("SELECT count() FROM User WHERE user_id = '?' AND password = '?'");// check if this is the right SQL 
 			
 			pstmt.setString(1, id);
@@ -46,6 +77,7 @@ public class Token {
 			System.out.println("Error");
 		}
 		isValid = false;
+>>>>>>> ea04797f529047c6704fd3c1bc68e34b9cc44a0a
 		return isValid;
 	}
 

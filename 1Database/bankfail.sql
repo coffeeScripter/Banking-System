@@ -101,7 +101,7 @@ DROP TABLE IF EXISTS `mydb`.`Transaction` ;
 CREATE TABLE IF NOT EXISTS `mydb`.`Transaction` (
   `trans_id` INT NOT NULL AUTO_INCREMENT,
   `amount` DECIMAL(6,2) NOT NULL,
-  `trans_type_code` VARCHAR(20) NOT NULL,
+  `trans_type_code` CHAR NOT NULL,
   `account_number` INT NOT NULL,
   `trans_date` TIMESTAMP NOT NULL,
   `cust_id` VARCHAR(45) UNIQUE NOT NULL,
